@@ -7,23 +7,14 @@ public class GaugeAnimation : MonoBehaviour
 {
     [SerializeField] private Slider hpSlider;
     [SerializeField] private float duration = 0.25f;
-    [SerializeField] private Button button;
+    private float maxHp = 100f;
+    private int count = 0;
 
-    private void Awake()
+    public void SetHp(float currentHp)
     {
-        button.onClick.AddListener(OnClickButton);
-    }
-
-    private void OnClickButton()
-    {
-        float current = hpSlider.value;
-        current += 1f;
-        SetHp(current, 10f);
-    }
-
-
-    public void SetHp(float currentHp, float maxHp)
-    {
+        count++;
+        currentHp *= count;
+        
         float targetValue = currentHp / maxHp;
 
         hpSlider.DOKill();
